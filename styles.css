@@ -1,0 +1,49 @@
+.heading {
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    font-size: 36px;
+    padding: 30px
+}
+
+.numbers {
+    display: inline-grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    grid-template-rows: 33.33% 33.33% 33.33%;
+}
+
+.number {
+    font-size: 40px;
+    width: 75px;
+    height: 75px;
+}
+
+.numbers-flex {
+    display: flex;
+    justify-content: center;
+}
+
+.display-flex {
+    display: flex;
+    justify-content: center;
+}
+
+.display {
+    width: 225px;
+    height: 75px;
+    border: 1px solid black;
+    border-radius: 2px;
+    text-align: right;
+    font-size: 25px;
+}
+
+.display p {
+    padding: 0 10px;
+}
+
+.menu-flex {
+    display: flex;
+    justify-content: center;
+}
