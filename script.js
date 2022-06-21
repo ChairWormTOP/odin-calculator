@@ -9,10 +9,13 @@ const multiply = document.querySelector('.multiply')
 const divide = document.querySelector('.divide')
 
 let currentValues = []
-let currrentValue = 0
 
 const setDisplay = (value) => {
     if (currentValues.length === 2) {
+        display.textContent = ''
+    }
+
+    if (display.textContent === '0') {
         display.textContent = ''
     }
 
@@ -21,11 +24,15 @@ const setDisplay = (value) => {
 
 const clearDisplay = () => {
     currentValues = []
-    display.textContent = ''
+    display.textContent = '0'
 }
 
 const backSpace = () => {
     display.textContent = display.textContent.slice(0, display.textContent.length - 1)
+
+    if (display.textContent === '') {
+        display.textContent = '0'
+    }
 }
 
 const operate = (operand1, operator, operand2) => {
@@ -61,7 +68,9 @@ clear.addEventListener('click', () => {
     enableAllButtons()
 })
 
-backspace.addEventListener('click', () => backSpace())
+backspace.addEventListener('click', () => {
+    backSpace()
+})
 
 operation.addEventListener('click', () => {
     currentValues.push(display.textContent)
@@ -71,6 +80,12 @@ operation.addEventListener('click', () => {
 })
 
 add.addEventListener('click', () => {
+    if (currentValues.length === 2) {
+        currentValues.push(display.textContent)
+        display.textContent = operate(currentValues[0], currentValues[1], currentValues[2])
+        currentValues = []
+    }
+
     currentValues.push(display.textContent)
     currentValues.push('+')
 })
