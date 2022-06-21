@@ -7,14 +7,11 @@ const add = document.querySelector('.add')
 const subtract = document.querySelector('.subtract')
 const multiply = document.querySelector('.multiply')
 const divide = document.querySelector('.divide')
+const dot = document.querySelector('.dot')
 
 let currentValues = []
 
 const setDisplay = (value) => {
-    if (currentValues.length === 2) {
-        display.textContent = ''
-    }
-
     if (display.textContent === '0') {
         display.textContent = ''
     }
@@ -37,13 +34,17 @@ const backSpace = () => {
 
 const operate = (operand1, operator, operand2) => {
     if (operator === '+') {
-        return parseInt(operand1) + parseInt(operand2)
+        return parseFloat(operand1) + parseFloat(operand2)
     } else if (operator === '-') {
-        return parseInt(operand1) - parseInt(operand2)
+        return parseFloat(operand1) - parseFloat(operand2)
     } else if (operator === '*') {
-        return parseInt(operand1) * parseInt(operand2)
+        return parseFloat(operand1) * parseFloat(operand2)
     } else if (operator === '/') {
-        return parseInt(operand1) / parseInt(operand2)
+        if (operand2 === '0') {
+            return 'Error: Cannot divide by zero.'
+        }
+
+        return parseFloat(operand1) / parseFloat(operand2)
     }
 }
 
@@ -83,24 +84,56 @@ add.addEventListener('click', () => {
     if (currentValues.length === 2) {
         currentValues.push(display.textContent)
         display.textContent = operate(currentValues[0], currentValues[1], currentValues[2])
-        currentValues = []
+        currentValues = [display.textContent, '+']
+        return
     }
 
     currentValues.push(display.textContent)
+    display.textContent = '0'
     currentValues.push('+')
 })
 
 subtract.addEventListener('click', () => {
+    if (currentValues.length === 2) {
+        currentValues.push(display.textContent)
+        display.textContent = operate(currentValues[0], currentValues[1], currentValues[2])
+        currentValues = [display.textContent, '-']
+        return
+    }
+
     currentValues.push(display.textContent)
+    display.textContent = '0'
     currentValues.push('-')
 })
 
 multiply.addEventListener('click', () => {
+    if (currentValues.length === 2) {
+        currentValues.push(display.textContent)
+        display.textContent = operate(currentValues[0], currentValues[1], currentValues[2])
+        currentValues = [display.textContent, '*']
+        return
+    }
+
     currentValues.push(display.textContent)
+    display.textContent = '0'
     currentValues.push('*')
 })
 
 divide.addEventListener('click', () => {
+    if (currentValues.length === 2) {
+        currentValues.push(display.textContent)
+        display.textContent = operate(currentValues[0], currentValues[1], currentValues[2])
+        currentValues = [display.textContent, '/']
+        return
+    }
+
     currentValues.push(display.textContent)
+    display.textContent = '0'
     currentValues.push('/')
+})
+
+dot.addEventListener('click', () => {
+    if (!display.textContent.includes('.')) {
+        display.textContent += '.'
+    }
 })
